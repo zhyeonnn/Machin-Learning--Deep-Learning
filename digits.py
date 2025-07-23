@@ -2,6 +2,9 @@
 from sklearn.datasets import load_digits
 import numpy as np
 import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+
 
 digits = load_digits()
 # 데이터셋의 형태 확인
@@ -21,4 +24,21 @@ for index, (image, label) in enumerate(zip(digits.data[0:5], digits.target[0:5])
     plt.subplot(1,5,index+1)
     plt.imshow(np.reshape(image,(8,8)), cmap=plt.cm.gray)
     plt.title('Training: %i\n'%label,fontsize=20)
-plt.show()
+# plt.show()
+
+# 훈련 데이터와 테스트 데이터 분리
+# test_size = 테스트 데이터를 전체 데이터의 25%사용하겠다는 의미
+x_train, x_test, y_train, y_test = train_test_split(digits.data, digits.target,test_size=0.25, random_state=0 )
+logisticRegr = LogisticRegression()
+# 모델 훈련
+logisticRegr.fit(x_train, y_train)
+print(logisticRegr.fit(x_train, y_train))
+
+# 모델 예측
+# reshape : (샘플 수, 특성 수)로 출력, -1은 자동 계산 / (1,64)즉, 1개의 64차원에 대한 예측을 해줌
+numpyArrayPrint = logisticRegr.predict(x_test[0].reshape(1,-1))
+# 이미지 10개에 대한 예측을 한번에 출력
+arrayPrint = logisticRegr.predict(x_test[0:10])
+
+print(numpyArrayPrint)
+print(arrayPrint)
