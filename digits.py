@@ -4,6 +4,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
+import seaborn as sns
+from sklearn import metrics
 
 
 digits = load_digits()
@@ -42,3 +44,21 @@ arrayPrint = logisticRegr.predict(x_test[0:10])
 
 print(numpyArrayPrint)
 print(arrayPrint)
+
+# 모델 성능을 측정하는 방법 = 혼동행렬(정확도, 정밀도, 재현율)
+# 전체 데이터에 대한 예측(정답인 y_test제외하고 예측)
+predictions = logisticRegr.predict(x_test)
+# score를 사용한 성능 측정 = 정확도
+score = logisticRegr.score(x_test, y_test)
+print("score : ",score)
+
+# 혼동행렬(confusion_matrix)
+cm = metrics.confusion_matrix(y_test, predictions)
+plt.figure(figsize=(9,9))
+#heatmap으로 표현
+sns.heatmap(cm, annot=True, fmt= ".3f", linewidths=.5, square=True, cmap='Blues_r');
+plt.ylabel('Actual label');
+plt.xlabel('Predicted label');
+all_sample_title = 'Accuracy Score: {0}'.format(score)
+plt.title(all_sample_title,size = 15);
+plt.show()
