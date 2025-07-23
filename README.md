@@ -160,15 +160,31 @@
     - 최대우도법은 즉, 최대우도 추정치, 최대 가능성 추정량을 말한다.
 
 ### 선형 회귀
-`weather.py`
+`weather.ipynb`
 - 종속 변수와 독립 변수 사이의 관계를 설정하는 데 유용
 - 복잡한 연산 과정이 없다
 - 즉, 독립 변수를 사용하여 종속 변수의 움직임을 예측
 - 독립변수는 1개이상일 수 있다
 - 독립변수가 1개이면 단순 선형 회귀
 - 독립변수가 2개이상이면 다중 선형 회귀
-- weather.csv를 통해서 plot으로 데이터 간 관계를 시각화로 확인할 수 있다.
-- 
+
+  - #### weather.csv를 통해서 plot으로 데이터 간 관계를 시각화로 확인할 수 있다.
+    ```python
+    plt.scatter(X_test, y_test,color='gray')
+    plt.plot(X_test,y_pred,color='red',linewidth =2)
+    ```
+    - 실제값과 예측값을 시각화하여 표현
+    - 비슷한 결과가 나온다
+    - 루트 평균제곱법을 통한 값으로 정확도를 확인할 수 있다
+    - #### 정확도 확인하는 방법
+    - 온도의 범위(최소 온도, 최대 온도의 차)를 구해서 10%이하 값보다 낮으면 비슷하게 예측된다는 의미
+    ```python
+	maxTemp = dataset['MaxTemp'].values.max()
+	minTemp = dataset['MinTemp'].values.min()
+	tempRange = maxTemp - minTemp
+	succesePedict = tempRange * 0.1
+	print("10% 기준값 :",succesePedict)
+    ```
     
 # 딥러닝
 - 인간의 신경망 원리를 모방한 심층 신경망 이론을 기반으로 고안된 것이다.
