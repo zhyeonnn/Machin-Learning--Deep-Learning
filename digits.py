@@ -37,7 +37,7 @@ logisticRegr.fit(x_train, y_train)
 print(logisticRegr.fit(x_train, y_train))
 
 # 모델 예측
-# reshape : (샘플 수, 특성 수)로 출력, -1은 자동 계산 / (1,64)즉, 1개의 64차원에 대한 예측을 해줌
+# reshape : (행,열)로 출력, -1은 자동 계산 / (1,64)즉, 1개의 64차원에 대한 예측을 해줌
 numpyArrayPrint = logisticRegr.predict(x_test[0].reshape(1,-1))
 # 이미지 10개에 대한 예측을 한번에 출력
 arrayPrint = logisticRegr.predict(x_test[0:10])
