@@ -209,13 +209,47 @@
   - 비선형일 때는 결과가 다르게 발생할 수 있어서 사용하지 않는 게 좋다.
   - 성능은 K값에 따라 달라진다.
   - 반복 횟수에 따른 군집화 과정
-    <img width="50%" height="661" alt="image" src="https://github.com/user-attachments/assets/ab8c19f3-1fef-47d0-8880-7b859d210bfd" />
+  <img width="40%" height="661" alt="image" src="https://github.com/user-attachments/assets/ab8c19f3-1fef-47d0-8880-7b859d210bfd" />
+
   - 군집 크기가 다를 때
-    <img width="50%" height="559" alt="image" src="https://github.com/user-attachments/assets/15f907f0-a5cf-4f89-9889-81ae2aaa2d4f" />
+  <img width="40%" height="559" alt="image" src="https://github.com/user-attachments/assets/15f907f0-a5cf-4f89-9889-81ae2aaa2d4f" />
+
   - 군집마다 밀집도와 거리가 다를 때
-    <img width="50%" height="538" alt="image" src="https://github.com/user-attachments/assets/cf73b7b5-f079-468a-9847-98561884ad22" />
+  <img width="40%" height="538" alt="image" src="https://github.com/user-attachments/assets/cf73b7b5-f079-468a-9847-98561884ad22" />
 
+- #### 밀도 기반 군집 분석
+  - 사전에 클러스터의 숫자를 알지 못할 때 사용하기 유용
+  - 주어진 데이터에 이상치가 많이 포함되었을 때 사용하기 좋음
+  - 일정 밀도 이상을 가진 데이터를 기준으로 군집 형성
+  <img width="50%" height="592" alt="image" src="https://github.com/user-attachments/assets/8067d9ac-b6fc-4ebf-ba55-78fa0d06e6d4" />
 
+  - 노이즈에 영향을 받지 않으며 K-평균 군집화에 비해 연산량이 많지만 오목하고 볼록한 부분의 처리하는 데 유용함
+  <img width="50%" height="524" alt="image" src="https://github.com/user-attachments/assets/e197ba5d-3c44-42c7-8e8d-5bc6d4f4183a" />
+
+   - 노이즈 : 무작위성 데이터로 전처리 과정에서 제거해야하는 부분
+   - 이상치 : 관측된 데이터 범위에서 벗어난 아주 작거나 큰 값
+  <img width="50%" height="549" alt="image" src="https://github.com/user-attachments/assets/d59b5811-6a6a-440d-8a92-047f4661c5ac" />
+
+   - #### 밀도 기반 군집 분석을 이용한 군집 방법
+  <img width="50%" height="641" alt="image" src="https://github.com/user-attachments/assets/9e85ae20-6dd2-4109-9790-52485331aaed" />
+  <img width="50%" height="449" alt="image" src="https://github.com/user-attachments/assets/f5d5376c-8446-46da-adb4-7e9822e56ad8" />
+
+     1. 원 안에 점 p1에서 엡실론 내에 점이 m개 있으면 군집으로 인식
+     2. 점들을 가지고 있는 p1이 중심점
+     3. m = 3이면 엡실론 내에 3개이상의 점이 있을 때부터 하나의 군집이 된다. -> 군집 생성
+     4. 밀도가 높은 비역에서 중심점을 만족하는 데이터가 있다면 그 지역을 포함해서 군집 생성 -> 두 번째 군집 생성, 군집 확대
+     5. 더 이상의 중심점을 정의할 수 없을 때까지 <b>군집 생성, 두번째 군집 생성, 군집 확대</b>를 반복
+     6. 어떤 군집에도 포함되지 않은 데이터를 노이즈로 정의 -> 노이즈 정의
+
+- #### 주성분 분석 PCA
+  - 데이터 간소화
+  - 편하게 시각화해서 보기위해 특성을 압축해서 시각화
+  - 변수가 많은 고차원 데이터를 저차원으로 축소시켜서 대표 특성만 추출
+  - #### 축소 방법
+    - 데이터들의 분포 특성을 잘 설명하는 벡터 두개 선택(적절한 가중치를 찾을 때까지 학습 진행)
+    - 데이터 하나하나에 대한 성분을 분석하는게 아니라 여러 데이터가 하나의 분포를 이룰 때 이 분포의 주성분을 분석하는 것
+    - 
+  
 
 # 딥러닝
 - 인간의 신경망 원리를 모방한 심층 신경망 이론을 기반으로 고안된 것이다.
