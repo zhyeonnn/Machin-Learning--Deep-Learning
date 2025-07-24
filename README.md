@@ -217,7 +217,7 @@
   - 군집마다 밀집도와 거리가 다를 때
   <img width="40%" height="538" alt="image" src="https://github.com/user-attachments/assets/cf73b7b5-f079-468a-9847-98561884ad22" />
 
-- #### 밀도 기반 군집 분석
+- #### 밀도 기반 군집 분석(BDSCAN)
   - 사전에 클러스터의 숫자를 알지 못할 때 사용하기 유용
   - 주어진 데이터에 이상치가 많이 포함되었을 때 사용하기 좋음
   - 일정 밀도 이상을 가진 데이터를 기준으로 군집 형성
@@ -228,11 +228,11 @@
 
    - 노이즈 : 무작위성 데이터로 전처리 과정에서 제거해야하는 부분
    - 이상치 : 관측된 데이터 범위에서 벗어난 아주 작거나 큰 값
-  <img width="50%" height="549" alt="image" src="https://github.com/user-attachments/assets/d59b5811-6a6a-440d-8a92-047f4661c5ac" />
+  <img width="40%" height="549" alt="image" src="https://github.com/user-attachments/assets/d59b5811-6a6a-440d-8a92-047f4661c5ac" />
 
    - #### 밀도 기반 군집 분석을 이용한 군집 방법
-  <img width="50%" height="641" alt="image" src="https://github.com/user-attachments/assets/9e85ae20-6dd2-4109-9790-52485331aaed" />
-  <img width="50%" height="449" alt="image" src="https://github.com/user-attachments/assets/f5d5376c-8446-46da-adb4-7e9822e56ad8" />
+  <img width="40%" height="641" alt="image" src="https://github.com/user-attachments/assets/9e85ae20-6dd2-4109-9790-52485331aaed" />
+  <img width="40%" height="449" alt="image" src="https://github.com/user-attachments/assets/f5d5376c-8446-46da-adb4-7e9822e56ad8" />
 
      1. 원 안에 점 p1에서 엡실론 내에 점이 m개 있으면 군집으로 인식
      2. 점들을 가지고 있는 p1이 중심점
@@ -246,9 +246,33 @@
   - 편하게 시각화해서 보기위해 특성을 압축해서 시각화
   - 변수가 많은 고차원 데이터를 저차원으로 축소시켜서 대표 특성만 추출
   - #### 축소 방법
+  `creditcard`
     - 데이터들의 분포 특성을 잘 설명하는 벡터 두개 선택(적절한 가중치를 찾을 때까지 학습 진행)
     - 데이터 하나하나에 대한 성분을 분석하는게 아니라 여러 데이터가 하나의 분포를 이룰 때 이 분포의 주성분을 분석하는 것
-    - 
+    ```python
+	scaler = StandardScaler() # 평균=0, 표준편차=1 -> 스케일링
+	X_scaled = scaler.fit_transform(X)
+	
+	X_normalized = normalize(X_scaled) # 가우스분포(표준 정규화)에 따르도록 정규화
+	X_normalized = pd.DataFrame(X_normalized) # 데이터프레임으로 변환
+	
+	pca = PCA(n_components=2) # 2차원으로 차원 축소 선언
+	X_principal = pca.fit_transform(X_normalized) # 차원 축소 적용
+    ```
+  - #### 정규화 방법
+    - 머신러닝 모델에 주입되는 데이터들을 균일하게 만드는 방법
+    - #### Min-Max Normalization(최소-최대 정규화)
+      - 모델에 투입될 모든 데이터 중에서 가장 작은 값을 0, 가장 큰 값을 1로 두고, 나머지 값들은 비율을 맞춰서 모두 0과 1 사이의 값으로 스케일링해주는 것
+      - 이상치에 취약함
+    - #### Z-Score Normalixation(Z-점수 정규화)
+      - 표준 정규 분포(가우시안 분포)에 해당하도록 값을 바꿔주는 것
+      - 데이터의 표준편차가 크면 정규화 값이 0에 가까워진다
+  - 흐름
+      
+    `스케일링 -> fit,transform -> 정규화 -> DataFrame변환(안 하면 배열로 나열) -> 차원 축소(n_components = ?)
+    ->fit, transform(적용) -> DataFrame 변환 -> 열이름 변경 X_principal.colums=['','']`
+  - 시각화 자료에서 군집이 잘 표현되면 튜닝 잘한 것
+   
   
 
 # 딥러닝
