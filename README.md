@@ -37,7 +37,7 @@
 
 ### 머신 러닝의 학습 알고리즘(지도 학습, 비지도 학습, 강화 학습)
 
-<img width="50%" height="567" alt="image" src="https://github.com/user-attachments/assets/1c61eb81-a565-4a64-9aa3-c1695330b42d" /><img width="50%" height="525" alt="image" src="https://github.com/user-attachments/assets/93f7bab7-b714-46e9-a37a-fb3b2f65b2e2" />
+<img width="50%" height="550" alt="image" src="https://github.com/user-attachments/assets/1c61eb81-a565-4a64-9aa3-c1695330b42d" /><img width="50%" height="550" alt="image" src="https://github.com/user-attachments/assets/93f7bab7-b714-46e9-a37a-fb3b2f65b2e2" />
 
 
 |지도 학습|비지도 학습|
@@ -257,14 +257,14 @@
     - 데이터들의 분포 특성을 잘 설명하는 벡터 두개 선택(적절한 가중치를 찾을 때까지 학습 진행)
     - 데이터 하나하나에 대한 성분을 분석하는게 아니라 여러 데이터가 하나의 분포를 이룰 때 이 분포의 주성분을 분석하는 것
     ```python
-	scaler = StandardScaler() # 평균=0, 표준편차=1 -> 스케일링
-	X_scaled = scaler.fit_transform(X)
-	
-	X_normalized = normalize(X_scaled) # 가우스분포(표준 정규화)에 따르도록 정규화
-	X_normalized = pd.DataFrame(X_normalized) # 데이터프레임으로 변환
-	
-	pca = PCA(n_components=2) # 2차원으로 차원 축소 선언
-	X_principal = pca.fit_transform(X_normalized) # 차원 축소 적용
+		scaler = StandardScaler() # 평균=0, 표준편차=1 -> 스케일링
+		X_scaled = scaler.fit_transform(X)
+		
+		X_normalized = normalize(X_scaled) # 가우스분포(표준 정규화)에 따르도록 정규화
+		X_normalized = pd.DataFrame(X_normalized) # 데이터프레임으로 변환
+		
+		pca = PCA(n_components=2) # 2차원으로 차원 축소 선언
+		X_principal = pca.fit_transform(X_normalized) # 차원 축소 적용
     ```
   - #### 정규화 방법
     - 머신러닝 모델에 주입되는 데이터들을 균일하게 만드는 방법
@@ -300,6 +300,17 @@
      <img width="50%" height="408" alt="image" src="https://github.com/user-attachments/assets/d202e134-d139-4add-b862-90f1fafff00b" />
 
      - <경사 하강법>
+     	<br> **-> 실습(`do it!.ipyb`)**
+		<br> 기본 공식 : **y = wx + b**
+		1. 임의의 값으로 일단 넣고 확인 -> w = 1.0, b = 1.0
+		2. x값에는 입력값을 넣는데 임의로 x[0]값만 넣어서 확인 -> y_hat = x[0] * w + b
+		3. 위에서 나오는 y_hat값과 y[0]인 정답과 비교하여 비슷한 값이 나오도록 임의로 설정한 w와 b의 값을 변경하여 수정한다
+		4. 변화율이 양수이면 w를 증가시켜 예측값을 증가시킨다.
+		4-1. 변화율이 음수이면 w를 감소시켜 예측값을 증가시킨다.
+
+        <img width="1254" height="515" alt="image" src="https://github.com/user-attachments/assets/373523a7-50de-49c2-a5f2-0d1e3bcd623c" />
+
+  
        - 배치 경사 하강법
          - 전체 데이터셋에 대한 오류를 구한 후 기울기를 한 번만 계산하여 모델의 파라미터를 업데이트
          - 단점 : 오래걸림 
